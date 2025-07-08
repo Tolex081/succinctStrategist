@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Succinct Chess Challenge</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for the particle background animation */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #1a1a2e; /* Dark background for particles */
+            overflow-y: auto; /* Allow vertical scrolling */
+        }
+
+        #root {
+            position: relative;
+            z-index: 1; /* Ensure React app content is above particles */
+            min-height: 100vh; /* Ensure content takes at least full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align items to the top to allow scrolling */
+            padding: 20px; /* Padding for content on small screens */
+            box-sizing: border-box;
+        }
+
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0; /* Behind the main content */
+        }
+
+        .particle {
+            position: absolute;
+            background-color: var(--particle-color);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: moveParticles linear infinite;
+        }
+
+        @keyframes moveParticles {
+            0% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(calc(100vh + 50px)) translateX(calc(var(--rand-x) * 1px)) scale(var(--rand-scale));
+                opacity: 0;
+            }
+        }
+
+        /* Chess piece rotation animation */
+        @keyframes rotateY {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        @keyframes rotateX {
+            from { transform: rotateX(0deg); }
+            to { transform: rotateX(360deg); }
+        }
+
+        @keyframes rotateZ {
+            from { transform: rotateZ(0deg); }
+            to { transform: rotateZ(360deg); }
+        }
+
+        .chess-piece-svg {
+            animation-duration: 10s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            transform-style: preserve-3d; /* For better 3D rotation */
+        }
+
+        .chess-piece-svg.rotate-y { animation-name: rotateY; }
+        .chess-piece-svg.rotate-x { animation-name: rotateX; }
+        .chess-piece-svg.rotate-z { animation-name: rotateZ; }
+    </style>
+</head>
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+
+    <!-- Particle Container -->
+    <div class="particle-container" id="particleContainer"></div>
+
+    <script>
+        // JavaScript for dynamic particle generation
+        document.addEventListener('DOMContentLoaded', () => {
+            const particleContainer = document.getElementById('particleContainer');
+            const colors = ['#B753FF', '#FF955E', '#B0FF6F', '#61C3FF', '#FF54D7'];
+            const numParticles = 50; // Number of particles
+
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 5 + 3; // Size between 3px and 8px
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `-${Math.random() * 100}px`; // Start above the screen
+                particle.style.animationDelay = `${Math.random() * 10}s`; // Random delay for staggered animation
+                particle.style.animationDuration = `${Math.random() * 15 + 10}s`; // Random duration for varied speed
+                particle.style.setProperty('--particle-color', colors[Math.floor(Math.random() * colors.length)]);
+                particle.style.setProperty('--rand-x', (Math.random() * 200 - 100)); // Random horizontal drift
+                particle.style.setProperty('--rand-scale', Math.random() * 0.5 + 0.5); // Random scale change
+                particleContainer.appendChild(particle);
+            }
+        });
+    </script>
+</body>
+</html>
