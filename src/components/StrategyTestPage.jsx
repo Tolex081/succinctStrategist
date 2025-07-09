@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react'; // Import useMemo
 import { strategyTestScenarios, allMembers } from './gameData';
 
 // Succinct color palette for consistent styling
@@ -42,11 +42,13 @@ const shuffleArray = (array) => {
 
 // StrategyTestPage component
 function StrategyTestPage({ playerSelections, onTestComplete }) {
-    // Filter out selections where no member was chosen
-    const selectedCharacters = playerSelections.filter(s => s.selectedMemberId !== null).map(s => {
-        const member = allMembers.find(m => m.id === s.selectedMemberId);
-        return member ? { ...member, questionId: s.questionId } : null;
-    }).filter(Boolean); // Remove any nulls
+    // Memoize selectedCharacters to prevent unnecessary re-computations and re-renders
+    const selectedCharacters = useMemo(() => {
+        return playerSelections.filter(s => s.selectedMemberId !== null).map(s => {
+            const member = allMembers.find(m => m.id === s.selectedMemberId);
+            return member ? { ...member, questionId: s.questionId } : null;
+        }).filter(Boolean);
+    }, [playerSelections]); // Dependencies for useMemo
 
     // State for the current scenario index
     const [currentScenarioIndex, setCurrentScenarioIndex] = useState(0);
@@ -63,21 +65,25 @@ function StrategyTestPage({ playerSelections, onTestComplete }) {
     // State for typing effect
     const [displayedPrompt, setDisplayedPrompt] = useState('');
     const TYPING_SPEED = 30; // Milliseconds per character
+    // State for the shuffled members available for the current question's display
+    const [shuffledMembers, setShuffledMembers] = useState([]); // Added this line
 
     // Effect to shuffle scenarios (limit to 5) on component mount
     useEffect(() => {
         setShuffledScenarios(shuffleArray([...strategyTestScenarios]).slice(0, 5)); // Limit to 5 random questions
     }, []);
 
+    // Get the current scenario (derived state)
+    const currentScenario = shuffledScenarios[currentScenarioIndex];
+
     // Effect for typing animation when scenario changes
     useEffect(() => {
-        if (shuffledScenarios.length > 0 && currentScenarioIndex < shuffledScenarios.length) {
-            const fullPrompt = shuffledScenarios[currentScenarioIndex].prompt;
+        if (currentScenario) { // Use currentScenario directly as a dependency
             let i = 0;
             setDisplayedPrompt(''); // Clear previous prompt
             const typingInterval = setInterval(() => {
-                if (i < fullPrompt.length) {
-                    setDisplayedPrompt(prev => prev + fullPrompt.charAt(i));
+                if (i < currentScenario.prompt.length) {
+                    setDisplayedPrompt(prev => prev + currentScenario.prompt.charAt(i));
                     i++;
                 } else {
                     clearInterval(typingInterval);
@@ -86,10 +92,20 @@ function StrategyTestPage({ playerSelections, onTestComplete }) {
 
             return () => clearInterval(typingInterval); // Cleanup on unmount or re-render
         }
-    }, [currentScenarioIndex, shuffledScenarios]);
+    }, [currentScenario]); // Dependency on currentScenario
 
-    // Get the current scenario
-    const currentScenario = shuffledScenarios[currentScenarioIndex];
+    // Effect to shuffle and set available members for the current question
+    useEffect(() => {
+        if (!currentScenario) return; // Ensure currentScenario is defined before proceeding
+
+        // Filter out members already used in this test session
+        const membersForCurrentQuestion = allMembers.filter(member => !usedMemberIds.includes(member.id));
+
+        // Shuffle these available members for display
+        setShuffledMembers(shuffleArray([...membersForCurrentQuestion]));
+        setIsClickDisabled(false); // Re-enable selections for new question
+    }, [currentScenario, usedMemberIds, allMembers]); // Dependencies: currentScenario, usedMemberIds, allMembers (static)
+
 
     /**
      * Handles the selection of a character for the current scenario.
@@ -133,17 +149,17 @@ function StrategyTestPage({ playerSelections, onTestComplete }) {
     // Determine if the selected characters array is empty
     if (selectedCharacters.length === 0) {
         return (
-            <div className="bg-gray-900 bg-opacity-80 rounded-3xl shadow-2xl p-6 md:p-10 max-w-2xl w-full text-center border-4"
-                 style={{ borderColor: succinctColors.orange }}>
-                <h2 className="text-3xl md:text-5xl font-extrabold mb-6" style={{ color: succinctColors.orange }}>
+            <div className="bg-gray-900 bg-opacity-80 rounded-3xl shadow-2xl p-6 md:p-10 max-w-2xl w-full text-center sm:border-4"
+                 style={{ borderColor: succinctColors.orange }}> {/* Apply border only on sm and above */}
+                <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold mb-6" style={{ color: succinctColors.orange }}>
                     No Characters Selected!
                 </h2>
-                <p className="text-xl md:text-2xl text-gray-200 mb-8">
+                <p className="text-base sm:text-xl md:text-2xl text-gray-200 mb-8">
                     You need to complete the initial Chess Challenge to select your team before testing your strategy.
                 </p>
                 <button
                     onClick={() => onTestComplete(0, 0)} // Go back to preview (or start of main game)
-                    className="px-8 py-4 text-xl font-bold rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
+                    className="px-6 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl font-bold rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
                     style={{
                         backgroundColor: succinctColors.blue,
                         color: 'white',
@@ -157,26 +173,26 @@ function StrategyTestPage({ playerSelections, onTestComplete }) {
     }
 
     return (
-        <div className="bg-gray-900 bg-opacity-80 rounded-3xl shadow-2xl p-6 md:p-10 max-w-4xl w-full text-center border-4"
-             style={{ borderColor: succinctColors.orange }}>
-            <h2 className="text-2xl md:text-4xl font-extrabold mb-4" style={{ color: succinctColors.orange }}>
+        <div className="bg-gray-900 bg-opacity-80 rounded-3xl shadow-2xl p-6 md:p-10 max-w-4xl w-full text-center sm:border-4"
+             style={{ borderColor: succinctColors.orange }}> {/* Apply border only on sm and above */}
+            <h2 className="text-xl sm:text-2xl md:text-4xl font-extrabold mb-4" style={{ color: succinctColors.orange }}>
                 Strategy Test: Scenario {currentScenarioIndex + 1} of {shuffledScenarios.length}
             </h2>
             {/* Prompt with typing effect */}
-            <p className="text-lg md:text-xl text-gray-200 mb-8 leading-relaxed min-h-[100px] flex items-center justify-center">
+            <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-8 leading-relaxed min-h-[100px] flex items-center justify-center">
                 <span className="font-mono text-left w-full">
                     {displayedPrompt}
                 </span>
             </p>
 
             {/* Selected Characters Grid */}
-            <div className="pfp-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 justify-items-center mb-8">
-                {selectedCharacters.map(member => {
+            <div className="pfp-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-6 justify-items-center mb-8">
+                {shuffledMembers.map(member => { // Changed from selectedCharacters.map to shuffledMembers.map
                     const isUsed = usedMemberIds.includes(member.id);
                     return (
                         <div
                             key={member.id}
-                            className={`pfp-card relative w-28 h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden transition-all duration-300 ease-in-out
+                            className={`pfp-card relative w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden transition-all duration-300 ease-in-out
                                         flex items-center justify-center p-1.5
                                         ${isUsed || isClickDisabled ? 'opacity-50 cursor-not-allowed grayscale' : 'cursor-pointer hover:scale-105 hover:shadow-xl'}
                                         `}
@@ -194,7 +210,7 @@ function StrategyTestPage({ playerSelections, onTestComplete }) {
                                     onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/90x90/CCCCCC/000000?text=${member.name.charAt(0)}`; }}
                                 />
                             </div>
-                            <p className="absolute bottom-2 text-white text-xs md:text-sm font-semibold bg-gray-900 bg-opacity-70 px-2 py-1 rounded-md">
+                            <p className="absolute bottom-1 text-white text-xs sm:text-sm font-semibold bg-gray-900 bg-opacity-70 px-1 py-0.5 rounded-md">
                                 {member.name}
                             </p>
                         </div>
@@ -204,7 +220,7 @@ function StrategyTestPage({ playerSelections, onTestComplete }) {
 
             {/* Feedback Message */}
             {feedbackMessage && (
-                <p className={`text-xl md:text-2xl font-bold min-h-[30px] mb-4 transition-colors duration-500 text-center`} // Added text-center here
+                <p className={`text-base sm:text-xl md:text-2xl font-bold min-h-[30px] mb-4 transition-colors duration-500 text-center`}
                    style={{ color: feedbackMessage.includes('Perfect') ? succinctColors.greenNeon : succinctColors.redNeon }}>
                     {feedbackMessage}
                 </p>

@@ -33,10 +33,10 @@ export const baseGameQuestions = {
             id: 'q-king-1',
             piece: 'King',
             attributes: [
-                "Operates across disciplines — coding, creating, and connecting.",
-                "Leads initiatives that merge tech, art, and community culture.",
-                "Delivers results with unmatched agility and depth.",
-                "The ultimate multi-tool — from shipping features to sparking vibes."
+                "Holds the grand vision of Succinct's future.",
+  "Guides strategic decisions with wisdom and resolve.",
+  "Depends on the team’s loyalty and coordination.",
+  "Embodies executive leadership and inspires all roles to align."
             ],
             question: 'Which member best fits the King',
             rotationClass: 'rotate-y',
@@ -47,10 +47,10 @@ export const baseGameQuestions = {
             id: 'q-queen-1',
             piece: 'Queen',
             attributes: [
-                "Solid backbone of Succinct’s infrastructure and proof systems.",
-                "Executes reliably and coordinates across engineering teams.",
-                "Loyal to the mission and always ready to ship.",
-                "Builder of the backend, enabler of everyone else's success."
+                "Wields power across development, community, and creative fronts.",
+  "Leads initiatives and adapts to any challenge.",
+  "Delivers impact swiftly from backend to brand.",
+  "Symbolizes versatility, capable of filling any role — all-in-one."
             ],
             question: 'Which member best fits the Queen role?',
             rotationClass: 'rotate-x',
@@ -62,10 +62,10 @@ export const baseGameQuestions = {
             piece: 'Rook',
             attributes: [
 
-                "Solid backbone of Succinct’s infrastructure and proof systems.",
-                "Executes reliably and coordinates across engineering teams.",
-                "Loyal to the mission and always ready to ship.",
-                "Builder of the backend, enabler of everyone else's success.",
+               "Builds and protects Succinct’s infrastructure from the ground up.",
+  "Delivers reliable, scalable systems and proof tooling.",
+  "Holds the line with backend strength and clean code.",
+  "A fortress of logic — where every dev stands tall.",
             ],
             question: 'Which member best fits the Rook role?',
             rotationClass: 'rotate-z',
@@ -74,10 +74,10 @@ export const baseGameQuestions = {
             id: 'q-rook-2',
             piece: 'Rook',
             attributes: [
-                "Establishes and stabilizes Succinct’s global chapters.",
-                "Builds local communities with a structured, hands-on approach.",
-                "Supports grassroots members and ensures quality engagement.",
-                "Turns regions into resilient and thriving ecosystems."
+               "Stabilizes Succinct’s global presence through structure.",
+  "Guides regional teams and events with consistency.",
+  "Lays groundwork for future expansion and outreach.",
+  "A pillar of localized leadership across the ecosystem."
             ],
             question: 'Which member best fits the Rook role?',
             rotationClass: 'rotate-z',
@@ -88,10 +88,10 @@ export const baseGameQuestions = {
             id: 'q-bishop-1',
             piece: 'Bishop',
             attributes: [
-                "Carries Succinct’s voice through threads, docs, and talks.",
-                "Explains deep ZK concepts with clarity and impact.",
-                "Commands respect through well-crafted storytelling.",
-                "Bridges code and people with the power of words."
+                "Translates complex ZK concepts into inspiring messages.",
+  "Uses words like magic to connect tech with people.",
+  "Communicates Succinct’s mission through writing and speaking.",
+  "The voice of Succinct — sharp, eloquent, and enlightening."
             ],
             question: 'Which member best fits the Bishop role?',
             rotationClass: 'rotate-y',
@@ -100,10 +100,10 @@ export const baseGameQuestions = {
             id: 'q-bishop-2',
             piece: 'Bishop',
             attributes: [
-                "Shapes community energy through design and communication.",
-                "Guides members while crafting Succinct’s visual identity.",
-                "Balances order and creativity in everything they touch.",
-                "Protects the vibe and beautifies the journey."
+              "Moves with grace through the channels of community.",
+  "Creates clarity, calm, and cohesion during storms.",
+  "Guides engagement and resolves internal conflicts.",
+  "Supports members with empathy and leadership energy."
             ],
             question: 'Which member best fits the Bishop role?',
             rotationClass: 'rotate-y',
@@ -114,10 +114,10 @@ export const baseGameQuestions = {
             id: 'q-knight-1',
             piece: 'Knight',
             attributes: [
-                "Breaks through blockers with creativity and charm.",
-                "Builds quickly and inspires participation around their work.",
-                "Flexible and fearless in unfamiliar environments.",
-                "The social hacker who codes and rallies others at once."
+                "Navigates problems with unique technical creativity.",
+  "Jumps over blockers and delivers surprise breakthroughs.",
+  "Thrives in chaotic dev spaces and hackathons.",
+  "Lively, fast, and inspiring — the builder with a spark."
             ],
             question: 'Which member best fits the Knight role?',
             rotationClass: 'rotate-x',
@@ -126,10 +126,10 @@ export const baseGameQuestions = {
             id: 'q-knight-2',
             piece: 'Knight',
             attributes: [
-                "Takes unconventional paths to spark laughter and loyalty.",
-                "Unites regional teams through wit and absurdity.",
-                "Disarms tension with humor while coordinating efforts.",
-                "A meme general with a map and a megaphone."
+                "Unpredictable, bold, and hilariously effective.",
+  "Turns memes into morale boosts and engagement spikes.",
+  "Disarms tension and sparks conversation through chaos.",
+  "The tactical jester who drives community culture forward."
             ],
             question: 'Which member best fits the Knight role?',
             rotationClass: 'rotate-x',
@@ -140,10 +140,10 @@ export const baseGameQuestions = {
             id: 'q-pawn-1',
             piece: 'Pawn',
             attributes: [
-                "Contributes daily to team success without seeking credit.",
-                "Consistent, humble, and always present for others.",
-                "Keeps the culture strong through routine actions.",
-                "Starts small — grows into an irreplaceable team force."
+               "Foundational contributor in daily Succinct community life.",
+  "Always present, always dependable in support roles.",
+  "Steps up to help without seeking spotlight.",
+  "The unsung hero — humble, but mighty in impact."
             ],
             question: 'Which member best fits the Pawn role?',
             rotationClass: 'rotate-z',
@@ -152,10 +152,10 @@ export const baseGameQuestions = {
             id: 'q-pawn-2',
             piece: 'Pawn',
             attributes: [
-                "Adds life and color to every campaign or moment.",
-                "Energizes chats and events with flair and emotion.",
-                "Visually sets the tone with memes, stickers, or banners.",
-                "Creates joy and identity with every pixel and ping."
+                "Brings creative flair to the community's look and feel.",
+  "Adds color and life through visuals, memes, and designs.",
+  "Helps vibe-check channels and spark interactions.",
+  "Makes Succinct both beautiful and alive with energy",
             ],
             question: 'Which member best fits the Pawn role?',
             rotationClass: 'rotate-z',
@@ -164,10 +164,10 @@ export const baseGameQuestions = {
             id: 'q-pawn-3',
             piece: 'Pawn',
             attributes: [
-                "Welcomes newcomers with clarity and warmth.",
-                "Speaks up for the silent and guides the confused.",
-                "Sets the tone in calls and chats alike.",
-                "The community’s calming voice and friendly guide."
+                "First to welcome new members and make them feel seen.",
+  "Breaks the ice and helps others settle in.",
+  "Explains the ecosystem in a friendly, simple voice.",
+  "A natural speaker and vibe setter for fresh faces."
             ],
             question: 'Which member best fits the Pawn role?',
             rotationClass: 'rotate-z',
@@ -176,10 +176,10 @@ export const baseGameQuestions = {
             id: 'q-pawn-4',
             piece: 'Pawn',
             attributes: [
-                "Acts as the invisible glue in community bonding.",
-                "Never loud, but always present and valuable.",
-                "Represents dedication to culture and inclusion.",
-                "Supports vibes, team spirit, and daily engagement rituals."
+                "Supports regional growth with consistent presence.",
+  "Builds small teams and empowers local contributors.",
+  "Bridges global initiatives with local momentum.",
+  "Key to grassroots movement — humble and hands-on."
             ],
             question: 'Which member best fits the Pawn role?',
         },
@@ -187,10 +187,10 @@ export const baseGameQuestions = {
             id: 'q-pawn-5',
             piece: 'Pawn',
             attributes: [
-                "Documents and shares learnings from local initiatives.",
-                "Promotes region-specific wins to inspire global peers.",
-                "Brings structure and storytelling to every local push.",
-                "Helps regional voices become community-wide truths."
+                "Takes notes, shares insights, and learns by doing.",
+  "Acts as the voice of early contributors and explorers.",
+  "Grows rapidly through content, experiments, and discussion.",
+  "On the journey to become a Knight or Bishop someday."
             ],
             question: 'Which member best fits the Pawn role?',
             rotationClass: 'rotate-z',
@@ -202,25 +202,25 @@ export const baseGameQuestions = {
 // Using imported images
 export const allMembers = [
     { id: 'memberA', name: 'Uma', img: Uma, roles: ['CEO', 'Artist', 'Developer', 'Community Manager', 'Writer','Leader', 'Engager', 'Regional Lead', 'Speaker', 'Shitposter'] },
-    { id: 'memberB', name: 'Yinger', img: Yinger, roles: ['Developer', 'Community Manager', 'Writer', 'CEO', 'Leader','Engager', 'Regional Lead', 'Speaker', 'Shitposter'] },
+    { id: 'memberB', name: 'Yinger', img: Yinger, roles: ['Developer', 'Community Manager', 'Writer', 'CEO', 'Engager', 'Regional Lead', 'Speaker', 'Shitposter'] },
     { id: 'memberC', name: 'Addy', img: Addy, roles: ['Artist', 'Developer', 'Writer', 'CEO', 'Engager', 'Regional Lead','Leader', 'Speaker', 'Shitposter'] },
-    { id: 'memberD', name: 'Enspire', img: Enspire, roles: ['Developer', 'Regional Lead'] },
-    { id: 'memberE', name: 'Stepaks', img: Stepaks, roles: ['Regional Lead', 'Developer'] },
-    { id: 'memberF', name: 'Zarh0n', img: Zarh0n, roles: ['Regional Lead', 'Community Supporter'] },
-    { id: 'memberG', name: 'Saigon', img: Saigon, roles: ['Regional Lead', 'Community Supporter'] },
-    { id: 'memberH', name: 'zKDan', img: ZkDan, roles: ['Community Supporter', 'Team Leader', 'Engager'] }, // Changed to Team Leader
-    { id: 'memberI', name: 'Pix', img: Pix, roles: ['Artist', 'Community Supporter'] },
-    { id: 'memberJ', name: 'Jason', img: Jason, roles: ['Writer', 'Community Supporter'] },
-    { id: 'memberK', name: 'Coco', img: Coco, roles: ['Community Supporter', 'Writer', 'Speaker'] },
-    { id: 'memberL', name: 'Bugs', img: Bugs, roles: ['Regional Lead', 'Community Supporter', 'Developer'] },
+    { id: 'memberD', name: 'Enspire', img: Enspire, roles: ['Developer','Engager', 'Regional Lead','Community Supporter'] },
+    { id: 'memberE', name: 'Stepaks', img: Stepaks, roles: ['Regional Lead','Engager', 'Developer','Community Supporter'] },
+    { id: 'memberF', name: 'Zarh0n', img: Zarh0n, roles: ['Regional Lead', 'Engager','Community Supporter'] },
+    { id: 'memberG', name: 'Saigon', img: Saigon, roles: ['Regional Lead', 'Engager','Community Supporter'] },
+    { id: 'memberH', name: 'zKDan', img: ZkDan, roles: ['Community Supporter', 'Engager','Writer', 'Speaker', 'Engager'] }, // Changed to Team Leader
+    { id: 'memberI', name: 'Pix', img: Pix, roles: ['Artist', 'Engager','Community Supporter'] },
+    { id: 'memberJ', name: 'Jason', img: Jason, roles: ['Writer','Engager', 'Community Supporter'] },
+    { id: 'memberK', name: 'Coco', img: Coco, roles: ['Community Supporter','Engager', 'Writer', 'Speaker'] },
+    { id: 'memberL', name: 'Bugs', img: Bugs, roles: ['Regional Lead', 'Engager','Community Supporter', 'Developer'] },
     { id: 'memberM', name: 'Oluseyi', img: Oluseyi, roles: ['Community Supporter'] },
-    { id: 'memberN', name: 'Shalen', img: Shalen, roles: ['Writer', 'Community Supporter'] },
-    { id: 'memberO', name: 'tuong', img: Tuong, roles: ['Community Supporter', 'Shitposter'] },
-    { id: 'memberP', name: 'Wylo', img: Wylo, roles: ['Shitposter', 'Community Supporter'] },
-    { id: 'memberQ', name: 'mvkise', img: Mvkise, roles: ['Regional Lead', 'Community Supporter', 'Shitposter'] },
-    { id: 'memberR', name: 'cryptomeii', img: Cryptomeii, roles: ['Community Supporter', 'Regional Lead'] },
-    { id: 'memberS', name: 'fake', img: Fake, roles: ['Team Leader', 'Community Supporter'] }, // Changed to Team Leader
-    { id: 'memberT', name: 'Ljngljng', img: Ljngljng, roles: ['Artist', 'Community Supporter'] },
+    { id: 'memberN', name: 'Shalen', img: Shalen, roles: ['Writer','Engager', 'Community Supporter'] },
+    { id: 'memberO', name: 'tuong', img: Tuong, roles: ['Community Supporter','Engager', 'Shitposter'] },
+    { id: 'memberP', name: 'Wylo', img: Wylo, roles: ['Shitposter','Engager', 'Community Supporter'] },
+    { id: 'memberQ', name: 'mvkise', img: Mvkise, roles: ['Regional Lead','Engager', 'Community Supporter', 'Shitposter'] },
+    { id: 'memberR', name: 'cryptomeii', img: Cryptomeii, roles: ['Community Supporter','Engager', 'Regional Lead'] },
+    { id: 'memberS', name: 'fake', img: Fake, roles: [ 'Community Supporter','Engager','Writer', 'Speaker'] }, // Changed to Team Leader
+    { id: 'memberT', name: 'Ljngljng', img: Ljngljng, roles: ['Artist','Engager', 'Community Supporter'] },
 ];
 
 // Strategy Test Scenarios
@@ -261,11 +261,7 @@ export const strategyTestScenarios = [
         prompt: 'Expansion: A new regional community is forming, and they need guidance and support to get started. Who will you assign as their primary contact?',
         requiredRole: 'Regional Lead',
     },
-    {
-        id: 's-team-1',
-        prompt: 'Internal Support: The core team needs assistance with an administrative task that requires deep familiarity with internal operations. Who can reliably handle this?',
-        requiredRole: 'Team Leader', // Changed to Team Leader
-    },
+    
     {
         id: 's-dev-2',
         prompt: 'Feature Request: A crucial new feature for an SP1-based application has been requested. Who should be assigned to build this amazing app?',
@@ -336,11 +332,7 @@ export const strategyTestScenarios = [
         prompt: 'Local Meetup: Our London community wants to host their first in-person meetup. Who will you send to help them organize and promote the event locally?',
         requiredRole: 'Regional Lead',
     },
-    {
-        id: 's-team-3',
-        prompt: 'Cross-Departmental Sync: Two teams are struggling to align on a project. Who can facilitate a smooth cross-departmental sync to get everyone on the same page?',
-        requiredRole: 'Team Leader', // Changed to Team Leader
-    },
+    
     {
         id: 's-speaker-2',
         prompt: 'Podcast Guest: A popular blockchain podcast wants to interview someone from Succinct about the future of zkVMs. Who will you choose to represent us?',

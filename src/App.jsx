@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import PreviewPage from './components/PreviewPage';
 import GamePage from './components/GamePage';
 import ResultScreen from './components/ResultScreen';
-import StrategyTestPage from './components/StrategyTestPage'; // New import
+import StrategyTestPage from './components/StrategyTestPage';
 import { baseGameQuestions, allMembers } from './components/gameData';
 
-// Succinct color palette for consistent styling (added to App.js)
+// Succinct color palette for consistent styling
 const succinctColors = {
     purple: '#B753FF',
     orange: '#FF955E',
@@ -14,6 +14,7 @@ const succinctColors = {
     pink: '#FF54D7',
     redNeon: '#FF073A', // Red neon for failure
     greenNeon: '#39FF14', // Green neon for success
+    yellowBadge: '#FFD700', // Gold color for badge
 };
 
 // Main App component responsible for managing game flow and background
@@ -32,32 +33,8 @@ function App() {
     // State to store the total number of strategy test questions
     const [totalStrategyQuestions, setTotalStrategyQuestions] = useState(0);
 
-
-    // Effect to load saved selections from local storage on initial mount
-    useEffect(() => {
-        const savedSelections = localStorage.getItem('succinctChessSelections');
-        if (savedSelections) {
-            try {
-                const parsedSelections = JSON.parse(savedSelections);
-                if (Array.isArray(parsedSelections) && parsedSelections.length > 0) {
-                    setPlayerSelections(parsedSelections);
-                    setCurrentPage('results'); // Go directly to results if saved data exists
-                }
-            } catch (e) {
-                console.error("Failed to parse saved selections from local storage:", e);
-                localStorage.removeItem('succinctChessSelections'); // Clear corrupted data
-            }
-        }
-    }, []); // Empty dependency array means this runs once on mount
-
-    // Effect to save selections to local storage when playerSelections changes and on results screen
-    useEffect(() => {
-        // Only save if we are on the results page (after the main game, before strategy test)
-        // or if the strategy test has just completed.
-        if (currentPage === 'results' && playerSelections.length > 0) {
-            localStorage.setItem('succinctChessSelections', JSON.stringify(playerSelections));
-        }
-    }, [currentPage, playerSelections]);
+    // Removed useEffect for loading saved selections from local storage on initial mount
+    // Removed useEffect for saving selections to local storage
 
     /**
      * Shuffles an array in place using the Fisher-Yates (Knuth) algorithm.
@@ -107,7 +84,7 @@ function App() {
      * @param {object} pieceCounts - The counts of each chess piece selected by the player.
      */
     const handleStartGame = (pieceCounts) => {
-        localStorage.removeItem('succinctChessSelections'); // Clear previous selections for a new game
+        // Removed localStorage.removeItem('succinctChessSelections');
         const questions = generateGameQuestions(pieceCounts);
         setGameQuestionsForSession(questions);
 
@@ -197,24 +174,41 @@ function App() {
                     />
                 );
             case 'strategyTestResults':
-                const isSuccess = strategyTestScore >= totalStrategyQuestions / 2; // Example success condition
-                const message = isSuccess
-                    ? ' Banger! Congratulations, you are a good strategist!'
-                    : 'Bruhh, you need to restrategize!';
-                const messageColor = isSuccess ? succinctColors.greenNeon : succinctColors.redNeon; // Use succinctColors here
+                let message = '';
+                let messageColor = '';
+                let icon = null;
+                let borderColor = '';
+
+                if (strategyTestScore === totalStrategyQuestions) {
+                    message = 'Community Banger! Congratulations, you are a good strategist!';
+                    messageColor = succinctColors.greenNeon;
+                    icon = <CrownIcon color={messageColor} size="1.5em" />;
+                    borderColor = succinctColors.greenNeon;
+                } else if (strategyTestScore >= totalStrategyQuestions * 0.6) { // 3/5 to 4/5 (60% to 80%)
+                    message = 'Solid effort! You\'re on your way to becoming a strategic master.';
+                    messageColor = succinctColors.yellowBadge;
+                    icon = <BadgeIcon color={messageColor} size="1.5em" />;
+                    borderColor = succinctColors.yellowBadge;
+                } else { // 2/5 down
+                    message = 'Bruhh, you need to restrategize!';
+                    messageColor = succinctColors.redNeon;
+                    icon = null; // No icon for low score
+                    borderColor = succinctColors.redNeon;
+                }
 
                 return (
-                    <div className="bg-gray-900 bg-opacity-80 rounded-3xl shadow-2xl p-6 md:p-10 max-w-2xl w-full text-center border-4"
-                         style={{ borderColor: messageColor }}>
-                        <h2 className="text-3xl md:text-5xl font-extrabold mb-6" style={{ color: messageColor }}>
+                    <div className="bg-gray-900 bg-opacity-80 rounded-3xl shadow-2xl p-6 md:p-10 max-w-2xl w-full text-center sm:border-4"
+                         style={{ borderColor: borderColor }}> {/* Apply border only on sm and above */}
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold mb-6" style={{ color: messageColor }}>
+                            {icon}
                             {message}
                         </h2>
-                        <p className="text-xl md:text-2xl text-gray-200 mb-8">
+                        <p className="text-base sm:text-xl md:text-2xl text-gray-200 mb-8">
                             You scored {strategyTestScore} out of {totalStrategyQuestions} in the Strategy Test.
                         </p>
                         <button
                             onClick={() => setCurrentPage('preview')}
-                            className="px-8 py-4 text-xl font-bold rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
+                            className="px-6 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl font-bold rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
                             style={{
                                 backgroundColor: succinctColors.blue,
                                 color: 'white',
@@ -238,5 +232,39 @@ function App() {
         </div>
     );
 }
+
+// SVG Crown Icon component (moved here for App.js to use it)
+const CrownIcon = ({ color = 'currentColor', size = '1em' }) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill={color}
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="inline-block align-middle mx-1"
+        style={{ width: size, height: size }}
+    >
+        <path d="M12 2L10 6L14 6L12 2ZM8 6V10H16V6H8ZM6 10V22H18V10H6Z M7 10L6 12L7 14L6 16L7 18L6 20L7 22 M17 10L18 12L17 14L18 16L17 18L18 20L17 22 M10 22L12 20L14 22 M12 6C11 6 10 7 10 8C10 9 11 10 12 10C13 10 14 9 14 8C14 7 13 6 12 6Z" />
+    </svg>
+);
+
+// SVG Badge Icon component
+const BadgeIcon = ({ color = 'currentColor', size = '1em' }) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill={color}
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="inline-block align-middle mx-1"
+        style={{ width: size, height: size }}
+    >
+        <path d="M12 2L9 4L6 2L3 4L6 6L3 8L6 10L9 8L12 10L15 8L18 10L21 8L18 6L21 4L18 2L15 4L12 2Z M12 12C10.8954 12 10 12.8954 10 14C10 15.1046 10.8954 16 12 16C13.1046 16 14 15.1046 14 14C14 12.8954 13.1046 12 12 12Z M12 16V22 M9 19H15" />
+    </svg>
+);
 
 export default App;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { baseGameQuestions, allMembers } from './gameData'; // Corrected import to baseGameQuestions
+import { baseGameQuestions, allMembers } from './gameData';
 
 // Succinct color palette for consistent styling
 const succinctColors = {
@@ -94,17 +94,20 @@ function ResultScreen({ playerSelections, onPlayAgain, onStartStrategyTest }) { 
 
     return (
         <> {/* Use a React Fragment to return multiple top-level elements */}
-            <div className="bg-gray-900 bg-opacity-80 rounded-3xl shadow-2xl p-6 md:p-10 max-w-4xl w-full text-center border-4 mb-8"
-                 style={{ borderColor: succinctColors.green }}>
-                <h2 className="text-3xl md:text-5xl font-extrabold mb-6" style={{ color: succinctColors.green }}>
-                    Strategy Complete!
+            <div className="bg-gray-900 bg-opacity-80 rounded-3xl shadow-2xl p-6 md:p-10 max-w-4xl w-full text-center sm:border-4 mb-8"
+                 style={{ borderColor: succinctColors.green }}> {/* Apply border only on sm and above */}
+                <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold mb-6" style={{ color: succinctColors.green }}>
+                    Challenge Complete!
                 </h2>
+                <p className="text-base sm:text-xl md:text-2xl text-gray-200 mb-8">
+                    You've completed the Succinct Chess Challenge!
+                </p>
 
-                <h3 className="text-xl md:text-2xl font-bold mb-4" style={{ color: succinctColors.blue }}>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-4" style={{ color: succinctColors.blue }}>
                     MY BEST CHESSGAME CHARACTERS:
                 </h3>
                 {/* Updated grid to display 4 items in a row on medium and large screens */}
-                <div className="pfp-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 md:gap-6 justify-items-center mb-8">
+                <div className="pfp-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 md:gap-6 justify-items-center mb-8">
                     {sortedPlayerSelections.map((selection, index) => {
                         // Use the helper function to find the question details
                         const question = findQuestionById(selection.questionId);
@@ -116,7 +119,7 @@ function ResultScreen({ playerSelections, onPlayAgain, onStartStrategyTest }) { 
                         return (
                             <div
                                 key={index}
-                                className="pfp-card relative w-32 h-32 md:w-36 md:h-36 rounded-2xl overflow-hidden
+                                className="pfp-card relative w-28 h-28 md:w-36 md:h-36 rounded-2xl overflow-hidden
                                            flex flex-col items-center justify-center p-1.5 shadow-lg"
                                 style={{
                                     backgroundImage: `linear-gradient(45deg, ${succinctColors.purple}, ${succinctColors.pink})`, // Gradient border effect
@@ -132,11 +135,11 @@ function ResultScreen({ playerSelections, onPlayAgain, onStartStrategyTest }) { 
                                     />
                                 </div>
                                 {/* Chess piece name displayed at the top with icon */}
-                                <p className="absolute top-2 left-1/2 -translate-x-1/2 text-white text-base md:text-lg font-semibold bg-gray-900 bg-opacity-70 px-3 py-1 rounded-md uppercase flex items-center whitespace-nowrap">
-                                    {getPieceIcon(question?.piece, 'white', '1.2em')} {/* Icon with white color and adjusted size */}
+                                <p className="absolute top-1 left-1/2 -translate-x-1/2 text-white text-sm sm:text-base md:text-lg font-semibold bg-gray-900 bg-opacity-70 px-2 py-0.5 rounded-md uppercase flex items-center whitespace-nowrap">
+                                    {getPieceIcon(question?.piece, 'white', '1em')} {/* Icon with white color and adjusted size */}
                                     {question?.piece || 'Role'}
                                 </p>
-                                <p className="absolute bottom-2 text-white text-sm md:text-base font-semibold bg-gray-900 bg-opacity-70 px-3 py-1 rounded-md">
+                                <p className="absolute bottom-1 text-white text-xs sm:text-sm md:text-base font-semibold bg-gray-900 bg-opacity-70 px-2 py-0.5 rounded-md">
                                     {selectedMember?.name || 'N/A'}
                                 </p>
                             </div>
@@ -149,7 +152,7 @@ function ResultScreen({ playerSelections, onPlayAgain, onStartStrategyTest }) { 
             <div className="flex flex-col sm:flex-row gap-4 mt-4 w-full max-w-md justify-center">
                 <button
                     onClick={onStartStrategyTest}
-                    className="px-8 py-4 text-xl font-bold rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
+                    className="px-6 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl font-bold rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
                     style={{
                         backgroundColor: succinctColors.orange,
                         color: 'white',
