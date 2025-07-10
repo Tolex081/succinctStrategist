@@ -215,9 +215,9 @@ export const allMembers = [
     { id: 'memberL', name: 'Bugs', img: Bugs, roles: ['Regional Lead', 'Engager','Community Supporter', 'Developer'] },
     { id: 'memberM', name: 'Oluseyi', img: Oluseyi, roles: ['Community Supporter'] },
     { id: 'memberN', name: 'Shalen', img: Shalen, roles: ['Writer','Engager', 'Community Supporter'] },
-    { id: 'memberO', name: 'tuong', img: Tuong, roles: ['Community Supporter','Engager', 'Shitposter'] },
+    { id: 'memberO', name: 'tuong', img: Tuong, roles: ['Community Supporter','Artist','Engager', 'Shitposter'] },
     { id: 'memberP', name: 'Wylo', img: Wylo, roles: ['Shitposter','Engager', 'Community Supporter'] },
-    { id: 'memberQ', name: 'mvkise', img: Mvkise, roles: ['Regional Lead','Engager', 'Community Supporter', 'Shitposter'] },
+    { id: 'memberQ', name: 'mvkise', img: Mvkise, roles: ['Regional Lead','Engager', 'Community Supporter','Writer',] },
     { id: 'memberR', name: 'cryptomeii', img: Cryptomeii, roles: ['Community Supporter','Engager', 'Regional Lead'] },
     { id: 'memberS', name: 'fake', img: Fake, roles: [ 'Community Supporter','Engager','Writer', 'Speaker'] }, // Changed to Team Leader
     { id: 'memberT', name: 'Ljngljng', img: Ljngljng, roles: ['Artist','Engager', 'Community Supporter'] },
